@@ -7,4 +7,8 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'ApplicationAngular';
+  verificationLogin:boolean=false;
+  handleLogin(loginSuccessful: boolean): void {
+    this.verificationLogin=loginSuccessful;
+  }
 }
