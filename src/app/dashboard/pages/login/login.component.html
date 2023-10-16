@@ -1,0 +1,40 @@
+<div class="container d-flex justify-content-center align-items-center h-100">
+    <form [formGroup]="loginForm">
+        <div class="row">
+            <h1 class="text-center" fontSize20>Login</h1>
+            <mat-form-field appearance="outline" class="w-100">
+                <mat-label>User</mat-label>
+                <input formControlName="user" type="text" matInput
+                    placeholder="Ingrese el usuario">
+                <mat-error>
+                    El campo es requerido
+                </mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="w-100">
+                <mat-label>Password</mat-label>
+                <input formControlName="password" [type]="mostrarPassword?'text':'password'" matInput
+                    placeholder="Ingrese la contraseña">
+                <mat-icon style="cursor: pointer;" matSuffix (click)="togglePasswordVisibility()">
+                    {{ mostrarPassword ? 'visibility' : 'visibility_off' }}
+                </mat-icon>
+                <mat-error>
+                    El campo es requerido
+                </mat-error>
+            </mat-form-field>
+            <div class="d-flex justify-content-center" style="position: relative;">
+                <button (click)="login()" [disabled]="loginForm.invalid" mat-flat-button color="primary">
+                    Iniciar Sesión
+                </button>
+                <span class="text-center" style="color: red; position: absolute; bottom: -30px;" *ngIf="loginInvalid">
+                    El usuario o contraseñas no son validos
+                </span>
+            </div>
+            <span>
+                usuario:'usuario1',
+                password:'12345',<br>
+                usuario:'usuario2',
+                password:'54321',
+            </span>
+        </div>
+    </form>
+</div>

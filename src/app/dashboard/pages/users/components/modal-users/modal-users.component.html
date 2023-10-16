@@ -1,0 +1,78 @@
+<h1 mat-dialog-title>
+    {{user?'Editando usuario':'Crear usuario'}}
+</h1>
+<div mat-dialog-content>
+    <form [formGroup]="alumForm">
+        <div class="row">
+            <mat-form-field class="w-100">
+                <mat-label>Nombre</mat-label>
+                <input formControlName="name" type="text" placeholder="Ingrese el nombre" matInput />
+                <mat-error *ngIf="alumForm.get('name')?.hasError('containsSpecialCharacters')">
+                    El nombre no puede contener caracteres especiales
+                </mat-error>
+                <mat-error *ngIf="alumForm.get('name')?.hasError('required')">
+                    El campo es requerido
+                </mat-error>
+            </mat-form-field>
+            <mat-form-field class="w-100">
+                <mat-label>Apellido</mat-label>
+                <input formControlName="lastName" type="text" placeholder="Ingrese el apellido" matInput />
+                <mat-error *ngIf="alumForm.get('lastName')?.hasError('containsSpecialCharacters')">
+                    El apellido no puede contener caracteres especiales
+                </mat-error>
+                <mat-error *ngIf="alumForm.get('lastName')?.hasError('required')">
+                    El campo es requerido
+                </mat-error>
+            </mat-form-field>
+            <mat-form-field class="w-100">
+                <mat-label>Email</mat-label>
+                <input formControlName="email" type="text" placeholder="Ingrese el correo" matInput />
+                <mat-error *ngIf="alumForm.get('email')?.hasError('email')">
+                    El correo electrónico no es válido
+                </mat-error>
+                <mat-error *ngIf="alumForm.get('email')?.hasError('required')">
+                    El campo es requerido
+                </mat-error>
+            </mat-form-field>
+            <mat-form-field class="w-100">
+                <mat-label>Edad</mat-label>
+                <input formControlName="age" type="number" min="16" max="40" placeholder="Ingrese la edad" matInput />
+                <mat-error *ngIf="alumForm.get('age')?.hasError('ageValidator')">
+                    El rango de la edad debe estar entre 16-40
+                </mat-error>
+                <mat-error *ngIf="alumForm.get('age')?.hasError('required')">
+                    El campo es requerido
+                </mat-error>
+            </mat-form-field>
+            <mat-form-field class="w-100">
+                <mat-label>Semestre</mat-label>
+                <mat-select formControlName="semester">
+                    <mat-option *ngFor="let i of options" [value]="i">{{ i }}</mat-option>
+                </mat-select>
+                <mat-error>
+                    El campo es requerido
+                </mat-error>
+            </mat-form-field>
+            <mat-form-field class="w-100">
+                <mat-label>Condicion</mat-label>
+                <mat-select formControlName="condition" [(value)]="conditionSelect">
+                    <mat-option value="Retirado">
+                        Retirado
+                    </mat-option>
+                    <mat-option value="Regular">
+                        Regular
+                    </mat-option>
+                </mat-select>
+                <mat-error>
+                    El campo es requerido
+                </mat-error>
+            </mat-form-field>
+        </div>
+    </form>
+</div>
+<div mat-dialog-actions>
+    <button mat-dialog-close mat-button>Cancelar</button>
+    <button [disabled]="alumForm.invalid" (click)="onSubmit()" mat-button>
+        Guardar
+    </button>
+</div>

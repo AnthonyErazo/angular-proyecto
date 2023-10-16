@@ -1,0 +1,23 @@
+<app-toolbar [drawer]="drawer"></app-toolbar>
+<mat-drawer-container class="example-container">
+    <button (click)="openUsersDialog()" mat-raised-button style="margin: 10px;">Añadir alumno</button>
+    <mat-drawer #drawer class="example-sidenav" mode="side">
+        <p>Auto-resizing sidenav</p>
+        <p *ngIf="showFiller">Lorem, ipsum dolor sit amet consectetur.</p>
+        <button (click)="showFiller = !showFiller" mat-raised-button>
+            Toggle extra text
+        </button>
+    </mat-drawer>
+
+    <div class="example-sidenav-content">
+        <app-table-users
+        (editUser)="onEditUser($event)"
+        [dataSource]="alums" 
+        (deleteUser)="onDeleteUser($event)">
+        ></app-table-users>
+    </div>
+
+</mat-drawer-container>
+<footer style="text-align: center; background-color: #f5f5f5; padding: 10px;">
+    &copy; Anthony E.
+</footer>
