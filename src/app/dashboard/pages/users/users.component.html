@@ -10,9 +10,10 @@
     </mat-drawer>
 
     <div class="example-sidenav-content">
-        <app-table-users
+        <mat-spinner *ngIf="loading" diameter="20"></mat-spinner>
+        <app-table-users  *ngIf="!loading"
         (editUser)="onEditUser($event)"
-        [dataSource]="alums" 
+        [dataSource]="alums"
         (deleteUser)="onDeleteUser($event)">
         ></app-table-users>
     </div>

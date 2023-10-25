@@ -1,5 +1,6 @@
 <div class="container d-flex justify-content-center align-items-center h-100">
-    <form [formGroup]="loginForm">
+    <mat-spinner *ngIf="isLoading" diameter="20"></mat-spinner>
+    <form *ngIf="!isLoading" [formGroup]="loginForm">
         <div class="row">
             <h1 class="text-center" fontSize20>Login</h1>
             <mat-form-field appearance="outline" class="w-100">

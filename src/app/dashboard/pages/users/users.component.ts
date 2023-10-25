@@ -1,22 +1,42 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatDrawer } from '@angular/material/sidenav';
 import { ModalUsersComponent } from './components/modal-users/modal-users.component';
-import data from 'src/app/data/data';
 import { Alums } from 'src/app/models';
+import { DataService } from 'src/app/shared/services/data.service';
+import { Observable, Subject, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-users',
   templateUrl: './users.component.html',
   styleUrls: ['./users.component.scss']
 })
-export class UsersComponent {
-  constructor(private matDialog: MatDialog) {
-    
+export class UsersComponent implements OnDestroy, OnInit{
+  alums:Alums[]=[];
+  loading = true;
+  private ngUnsubscribe = new Subject<void>();
+  constructor(private matDialog: MatDialog,
+  private dataService:DataService
+  ) {
+  }
+  ngOnInit(): void {
+    this.dataService.getDataObservable()
+    .pipe(takeUntil(this.ngUnsubscribe))
+    .subscribe(a=>{
+      this.alums=a;
+      this.loading=false;
+    },
+    (error)=>{
+      console.error('Error al cargar los datos: ',error);
+      this.loading=false;
+    })
+  }
+  ngOnDestroy(): void {
+    this.ngUnsubscribe.next();
+    this.ngUnsubscribe.complete();
   }
   @ViewChild('drawer', { static: false }) drawer: MatDrawer | undefined;
   showFiller = false;
-  alums = data;
 
   openUsersDialog(): void {
     this.matDialog.open(ModalUsersComponent).afterClosed().subscribe({

@@ -9,6 +9,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatTableModule } from '@angular/material/table';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatSelectModule } from '@angular/material/select';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { FontSize20Directive } from './directives/font-size-20.directive';
 
 
@@ -31,7 +32,8 @@ import { FontSize20Directive } from './directives/font-size-20.directive';
     FullnamePipe,
     MatSelectModule,
     MatTableModule,
-    FontSize20Directive
+    FontSize20Directive,
+    MatProgressSpinnerModule
   ]
 })
 export class SharedModule { }
