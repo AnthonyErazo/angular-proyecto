@@ -4,7 +4,7 @@ import { MatDrawer } from '@angular/material/sidenav';
 import { ModalUsersComponent } from './components/modal-users/modal-users.component';
 import { Alums } from 'src/app/models';
 import { DataService } from 'src/app/shared/services/data.service';
-import { Observable, Subject, takeUntil } from 'rxjs';
+import {Subscription} from 'rxjs';
 
 @Component({
   selector: 'app-users',
@@ -14,26 +14,26 @@ import { Observable, Subject, takeUntil } from 'rxjs';
 export class UsersComponent implements OnDestroy, OnInit{
   alums:Alums[]=[];
   loading = true;
-  private ngUnsubscribe = new Subject<void>();
+  private dataSubscription: Subscription = new Subscription();
   constructor(private matDialog: MatDialog,
   private dataService:DataService
   ) {
+    this.dataSubscription = this.dataService.getDataObservable().subscribe({
+      next: (alums) => {
+        this.alums = alums;
+        this.loading = false;
+      },
+      error: (error) => {
+        console.error('Error al cargar los datos: ', error);
+        this.loading = false;
+      }
+    });
   }
   ngOnInit(): void {
-    this.dataService.getDataObservable()
-    .pipe(takeUntil(this.ngUnsubscribe))
-    .subscribe(a=>{
-      this.alums=a;
-      this.loading=false;
-    },
-    (error)=>{
-      console.error('Error al cargar los datos: ',error);
-      this.loading=false;
-    })
+    
   }
   ngOnDestroy(): void {
-    this.ngUnsubscribe.next();
-    this.ngUnsubscribe.complete();
+    this.dataSubscription.unsubscribe();
   }
   @ViewChild('drawer', { static: false }) drawer: MatDrawer | undefined;
   showFiller = false;

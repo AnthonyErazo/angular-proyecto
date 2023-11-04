@@ -11,13 +11,15 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatSelectModule } from '@angular/material/select';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { FontSize20Directive } from './directives/font-size-20.directive';
+import { NotFoundComponent } from './not-found/not-found.component';
 
 
 
 @NgModule({
   declarations: [
     FullnamePipe,
-    FontSize20Directive
+    FontSize20Directive,
+    NotFoundComponent
   ],
   imports: [
     CommonModule

@@ -6,8 +6,10 @@ import { Component } from '@angular/core';
   styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent {
+  showFiller = false;
   verificationLogin:boolean=false;
   handleLogin(loginSuccessful: boolean): void {
     this.verificationLogin=loginSuccessful;
   }
+  
 }

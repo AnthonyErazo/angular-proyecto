@@ -1,0 +1,45 @@
+<h1 mat-dialog-title>
+    {{course?'Editando curso':'Crear curso'}}
+</h1>
+<div mat-dialog-content>
+    <form [formGroup]="courseForm">
+        <div class="row">
+            <mat-form-field class="w-100">
+                <mat-label>Nombre</mat-label>
+                <input formControlName="name" type="text" placeholder="Ingrese el nombre del curso" matInput />
+                <mat-error *ngIf="courseForm.get('name')?.hasError('containsSpecialCharacters')">
+                    El nombre no puede contener caracteres especiales
+                </mat-error>
+                <mat-error *ngIf="courseForm.get('name')?.hasError('required')">
+                    El campo es requerido
+                </mat-error>
+            </mat-form-field>
+            <mat-form-field class="w-100">
+                <mat-label>Descripción</mat-label>
+                <textarea style="height: 100px;" formControlName="description" type="text" placeholder="Ingrese descripcion del curso" matInput></textarea>
+                <mat-error *ngIf="courseForm.get('description')?.hasError('required')">
+                    El campo es requerido
+                </mat-error>
+            </mat-form-field>
+            <mat-form-field class="w-100">
+                <mat-label>Ingrese el rango de fecha</mat-label>
+                <mat-date-range-input [rangePicker]="picker">
+                    <input matStartDate formControlName="starDate" placeholder="Fecha inicio">
+                    <input matEndDate formControlName="endDate" placeholder="Fecha fin">
+                </mat-date-range-input>
+                <mat-hint>DD/MM/YYYY - DD/MM/YYYY</mat-hint>
+                <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-date-range-picker #picker></mat-date-range-picker>
+                <mat-error *ngIf="courseForm.get('starDate')?.hasError('required')">
+                    La fecha es requerida
+                </mat-error>
+            </mat-form-field>
+        </div>
+    </form>
+</div>
+<div mat-dialog-actions>
+    <button mat-dialog-close mat-button>Cancelar</button>
+    <button [disabled]="courseForm.invalid" (click)="onSubmit()" mat-button>
+        Guardar
+    </button>
+</div>

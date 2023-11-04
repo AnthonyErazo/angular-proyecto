@@ -1,0 +1,22 @@
+<div class="d-flex flex-wrap">
+    <mat-card class="example-card mb-3" *ngFor="let notice of notices">
+        <mat-card-header>
+            <mat-card-title>{{notice.title}}</mat-card-title>
+            <mat-card-subtitle>{{notice.author}}</mat-card-subtitle>
+        </mat-card-header>
+        <img *ngIf="!!notice.img" mat-card-image [src]="notice.img" [alt]="notice.title">
+        <mat-card-content class="m-auto">
+            <p *ngIf="notice.img">
+                {{notice.description | slice:0:200}}
+                <span *ngIf="notice.description.length > 200">...</span>
+            </p>
+            <p *ngIf="!notice.img">
+                {{notice.description|slice:0:800}}
+            </p>
+        </mat-card-content>
+        <mat-card-actions class="mt-auto">
+            <button mat-button>LIKE</button>
+            <button mat-button>SHARE</button>
+        </mat-card-actions>
+    </mat-card>
+</div>

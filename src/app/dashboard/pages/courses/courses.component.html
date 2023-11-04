@@ -1,0 +1,10 @@
+<h1 style="text-align: center;">Cursos disponibles</h1>
+<button (click)="openUsersDialog()" mat-raised-button style="margin: 10px;">Añadir Curso</button>
+<div>
+    <mat-spinner *ngIf="loading" diameter="20"></mat-spinner>
+    <app-table-courses  *ngIf="!loading"
+    (editCourse)="onEditCourse($event)"
+    [dataSource]="courses"
+    (deleteCourse)="onDeleteCourse($event)">
+    ></app-table-courses>
+</div>

@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Router } from '@angular/router';
 import { Alums } from 'src/app/models';
 
 @Component({
@@ -7,6 +8,10 @@ import { Alums } from 'src/app/models';
   styleUrls: ['./table-users.component.scss']
 })
 export class TableUsersComponent {
+  constructor(private router:Router){}
+  goToDetail(userId:number):void{
+    this.router.navigate(['home','users',userId]);
+  }
   @Input()
   dataSource:Alums[]=[];
 

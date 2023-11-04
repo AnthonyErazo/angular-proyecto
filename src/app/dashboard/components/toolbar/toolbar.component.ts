@@ -1,4 +1,4 @@
-import { Component, Input} from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { MatDrawer } from '@angular/material/sidenav';
 
 @Component({

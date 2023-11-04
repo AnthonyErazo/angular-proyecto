@@ -1,0 +1,36 @@
+<mat-spinner *ngIf="loading"></mat-spinner>
+<div *ngIf="!loading">
+    <h1>{{course.name}}</h1>
+    <p>{{course.description}}</p>
+    <p>{{course.starDate|date:'dd/MM/YYY'}}</p>
+    <p>{{course.endDate|date:'dd/MM/YYYY'}}</p>
+    <h2>Alumnos asociados:</h2>
+    <table mat-table [dataSource]="alumsCourses" class="mat-elevation-z8">
+        <ng-container matColumnDef="fullname">
+            <th mat-header-cell *matHeaderCellDef fontSize20>Nombre completo</th>
+            <td mat-cell [style]="user.condition=='Retirado'?'color:red;':''" *matCellDef="let user"> {{user|fullname:'uppercase'}} </td>
+        </ng-container>
+        <ng-container matColumnDef="email">
+            <th mat-header-cell *matHeaderCellDef fontSize20>Email</th>
+            <td mat-cell [style]="user.condition=='Retirado'?'color:red;':''" *matCellDef="let user"> {{user.email}} </td>
+        </ng-container>
+        <ng-container matColumnDef="semester">
+            <th mat-header-cell *matHeaderCellDef fontSize20>Semestre</th>
+            <td mat-cell [style]="user.condition=='Retirado'?'color:red;':''" *matCellDef="let user"> {{user.semester}} </td>
+        </ng-container>
+        <ng-container matColumnDef="condition">
+            <th mat-header-cell *matHeaderCellDef fontSize20>Condicion</th>
+            <td mat-cell [style]="user.condition=='Retirado'?'color:red;':''" *matCellDef="let user"> 
+                {{user.condition}}
+            </td>
+        </ng-container>
+        <ng-container matColumnDef="actions">
+            <th mat-header-cell *matHeaderCellDef fontSize20>Acciones</th>
+            <td mat-cell *matCellDef="let user">
+                <!-- Por definir acciones -->
+            </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>    
+</div>

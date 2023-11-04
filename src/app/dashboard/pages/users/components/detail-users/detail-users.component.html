@@ -1,0 +1,29 @@
+<mat-spinner *ngIf="loading"></mat-spinner>
+<div *ngIf="!loading">
+    <h1>Nombre: {{alum|fullname:'capitalizeFirstLetter'}}</h1>
+    <p>Correo: {{alum.email}}</p>
+    <p>Semestre: {{alum.semester}}</p>
+    <h2>Cursos Asociados:</h2>
+    <table mat-table [dataSource]="cursesAlums" class="mat-elevation-z8">
+        <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef fontSize20>Curso</th>
+            <td mat-cell *matCellDef="let course"> {{course.name}} </td>
+        </ng-container>
+        <ng-container matColumnDef="starDate">
+            <th mat-header-cell *matHeaderCellDef fontSize20>Fecha de inicio</th>
+            <td mat-cell *matCellDef="let course"> {{course.starDate|date: 'dd/MM/YYYY'}} </td>
+        </ng-container>
+        <ng-container matColumnDef="endDate">
+            <th mat-header-cell *matHeaderCellDef fontSize20>Fecha de fin</th>
+            <td mat-cell *matCellDef="let course"> {{course.endDate|date: 'dd/MM/YYYY'}} </td>
+        </ng-container>
+        <ng-container matColumnDef="actions">
+            <th mat-header-cell *matHeaderCellDef fontSize20>Acciones</th>
+            <td mat-cell *matCellDef="let course">
+                <!-- Por definir acciones -->
+            </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+</div>
