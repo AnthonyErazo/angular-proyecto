@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { Observable} from 'rxjs';
 import coursesdata from 'src/app/data/coursesdata';
 import data from 'src/app/data/data';
-import usersdata from 'src/app/data/usersdata';
 import { Alums, Course } from 'src/app/models';
 
 @Injectable({

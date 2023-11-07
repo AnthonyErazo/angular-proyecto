@@ -1,6 +1,7 @@
 export interface User{
-    user:String;
-    password:String;
+    user:string;
+    password:string;
+    token:string;
 }
 export interface Alums{
     id:number;

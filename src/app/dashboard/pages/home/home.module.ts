@@ -18,6 +18,7 @@ import { AvisosViewComponent } from './components/avisos-view/avisos-view.compon
     MatCardModule,
     MatDividerModule,
     MatButtonModule
-  ]
+  ],
+  exports:[HomeComponent]
 })
 export class HomeModule { }

@@ -4,6 +4,7 @@ import { Subscription } from 'rxjs';
 import { Alums, Course } from 'src/app/models';
 import { Router } from '@angular/router';
 import { DataService } from 'src/app/shared/services/data.service';
+import { UsersService } from '../../users.service';
 
 @Component({
   selector: 'app-detail-users',
@@ -25,12 +26,13 @@ export class DetailUsersComponent implements OnDestroy {
   loading = true;
   private dataSubscription: Subscription = new Subscription();
   constructor(private activateRoute: ActivatedRoute,
-    private dataService: DataService,
+    private usersService:UsersService,
     private router: Router) {
-    this.dataSubscription = this.dataService.getAlumById(this.activateRoute.snapshot.params['id']).subscribe({
+    this.dataSubscription = this.usersService.getAlumById(this.activateRoute.snapshot.params['id']).subscribe({
       next: (alum) => {
+        console.log(alum)
         this.alum = alum;
-        this.dataService
+        this.usersService
             .getCoursesByIds(this.alum.cursesId)
             .subscribe((courses) => {
               this.cursesAlums = courses;

@@ -16,6 +16,7 @@ import { SettingsRoutingModule } from './settings-routing.module';
   imports: [
     CommonModule,
     SettingsRoutingModule
-  ]
+  ],
+  exports:[SettingsComponent]
 })
 export class SettingsModule { }

@@ -23,12 +23,12 @@ import { DashboardRoutingModule } from './dashboard-routing.module';
   ],
   imports: [
     CommonModule,
-    UsersModule,
     SharedModule,
     MatToolbarModule,
     MatListModule,
     MatSidenavModule,
     RouterModule,
+    UsersModule,
     HomeModule,
     CoursesModule,
     DashboardRoutingModule

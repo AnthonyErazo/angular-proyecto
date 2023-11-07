@@ -1,7 +1,7 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component} from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from './auth.service';
-import { Router } from '@angular/router';
+import { tap } from 'rxjs';
 
 @Component({
   selector: 'app-auth',
@@ -14,8 +14,7 @@ export class AuthComponent {
   isLoading: boolean = false;
   loginInvalid:boolean=false;
   constructor(private fg:FormBuilder,
-    private authService:AuthService,
-    private router:Router){
+    private authService:AuthService){
     this.loginForm=this.fg.group({
       user:['',Validators.required],
       password:['',Validators.required]
@@ -24,20 +23,22 @@ export class AuthComponent {
   togglePasswordVisibility() {
     this.mostrarPassword = !this.mostrarPassword;
   }
-  @Output() systemLogin = new EventEmitter<boolean>();
-  login() {
-    const { user, password } = this.loginForm.value;
-    this.isLoading = true;
-    this.authService.login(user, password).subscribe((authenticated) => {
-      
-      if (authenticated) {
-        this.systemLogin.emit(true);
-        this.router.navigate(['/home']);
-      } else {
-        this.loginInvalid = true;
-        this.loginForm.reset();
-      }
-      this.isLoading = false;
-    });
+  login(): void {
+    if (this.loginForm.invalid) {
+      this.loginForm.markAllAsTouched();
+    } else {
+      this.isLoading = true;
+      this.authService.login(this.loginForm.getRawValue())
+      .pipe(
+        tap((authenticated) => {
+          if (authenticated) {
+          } else {
+            this.loginInvalid = true;
+            this.loginForm.reset();
+          }
+          this.isLoading = false;
+        })
+      ).subscribe();
+    }
   }
 }

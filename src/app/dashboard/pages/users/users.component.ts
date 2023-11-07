@@ -1,9 +1,10 @@
-import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { Component, OnDestroy, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatDrawer } from '@angular/material/sidenav';
 import { ModalUsersComponent } from './components/modal-users/modal-users.component';
 import { Alums } from 'src/app/models';
 import { DataService } from 'src/app/shared/services/data.service';
+import { UsersService } from 'src/app/dashboard/pages/users/users.service';
 import {Subscription} from 'rxjs';
 
 @Component({
@@ -11,14 +12,14 @@ import {Subscription} from 'rxjs';
   templateUrl: './users.component.html',
   styleUrls: ['./users.component.scss']
 })
-export class UsersComponent implements OnDestroy, OnInit{
+export class UsersComponent implements OnDestroy{
   alums:Alums[]=[];
   loading = true;
   private dataSubscription: Subscription = new Subscription();
   constructor(private matDialog: MatDialog,
-  private dataService:DataService
+  private usersService:UsersService
   ) {
-    this.dataSubscription = this.dataService.getDataObservable().subscribe({
+    this.dataSubscription = this.usersService.getAlums().subscribe({
       next: (alums) => {
         this.alums = alums;
         this.loading = false;
@@ -28,9 +29,6 @@ export class UsersComponent implements OnDestroy, OnInit{
         this.loading = false;
       }
     });
-  }
-  ngOnInit(): void {
-    
   }
   ngOnDestroy(): void {
     this.dataSubscription.unsubscribe();

@@ -1,33 +1,65 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
-import usersdata from 'src/app/data/usersdata';
+import { BehaviorSubject, Observable, map } from 'rxjs';
+import { User } from '../models';
+import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
+import { LoginPayload } from './models/authmodels';
+import { environment } from '../environments/environments.local';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  isAuthenticated = false;
+  private _authUser$ = new BehaviorSubject<User | null>(null);
+  public authUser$ = this._authUser$.asObservable();
 
-  login(username: string, password: string): Observable<boolean> {
+  constructor(private httpClient: HttpClient, private router: Router) {}
+
+  login(payload: LoginPayload): Observable<boolean> {
     return new Observable<boolean>((observer) => {
       setTimeout(()=>{
-        const user = usersdata.find(
-          (user) => user.usuario === username && user.password === password
-        );
-  
-        if (user) {
-          this.isAuthenticated = true;
-          observer.next(true);
-        } else {
-          observer.next(false);
-        }
-        observer.complete();
+        this.httpClient
+        .get<User[]>(
+          `${environment.baseUrl}/users?usuario=${payload.user}&password=${payload.password}`
+        )
+        .subscribe({
+          next: (response) => {
+            if (!response.length) {
+              observer.next(false);
+            } else {
+              const authUser = response[0];
+              this._authUser$.next(authUser);
+              localStorage.setItem('token', authUser.token);
+              this.router.navigate(['home']);
+              observer.next(true);
+            }
+            observer.complete();
+          },
+          error: (err) => {
+            observer.error(err);
+          },
+        });
       },2000);
     });
   }
 
-  logout(): void {
-    this.isAuthenticated = false;
+  verifyToken(): Observable<boolean> {
+    return this.httpClient
+      .get<User[]>(
+        `${environment.baseUrl}/users?token=${localStorage.getItem('token')}`
+      )
+      .pipe(
+        map((users) => {
+          if (!users.length) {
+            return false;
+          } else {
+            const authUser = users[0];
+            this._authUser$.next(authUser);
+            localStorage.setItem('token', authUser.token);
+            return true;
+          }
+        })
+      );
   }
 }
 
