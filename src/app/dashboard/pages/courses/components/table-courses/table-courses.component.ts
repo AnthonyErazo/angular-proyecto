@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Router } from '@angular/router';
-import { Course } from 'src/app/models';
+import { Course } from '../../models/coursesModels';
 
 @Component({
   selector: 'app-table-courses',

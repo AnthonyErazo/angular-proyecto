@@ -1,8 +1,8 @@
 import { Component, Inject } from '@angular/core';
 import { FormBuilder,FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { Course } from 'src/app/models';
 import { stringValidator } from 'src/app/utils/custom-validators';
+import { Course } from '../../models/coursesModels';
 
 @Component({
   selector: 'app-modal-courses',

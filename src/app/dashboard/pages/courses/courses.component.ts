@@ -1,10 +1,10 @@
 import { Component, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Subscription } from 'rxjs';
-import { DataService } from 'src/app/shared/services/data.service';
 import { MatDrawer } from '@angular/material/sidenav';
 import { ModalCoursesComponent } from './components/modal-courses/modal-courses.component';
-import { Course } from 'src/app/models';
+import { CoursesService } from './courses.service';
+import { Course } from './models/coursesModels';
 
 @Component({
   selector: 'app-courses',
@@ -16,11 +16,11 @@ export class CoursesComponent {
   loading = true;
   private dataSubscription: Subscription = new Subscription();
   constructor(private matDialog: MatDialog,
-  private dataService:DataService
+  private coursesService:CoursesService
   ) {
   }
   ngOnInit(): void {
-    this.dataSubscription = this.dataService.getCourseObservable().subscribe({
+    this.dataSubscription = this.coursesService.getCourses().subscribe({
       next: (courses) => {
         this.courses = courses;
         this.loading = false;
@@ -36,36 +36,55 @@ export class CoursesComponent {
   }
   @ViewChild('drawer', { static: false }) drawer: MatDrawer | undefined;
   showFiller = false;
-
-  openUsersDialog(): void {
+  openCoursesDialog(): void {
     this.matDialog.open(ModalCoursesComponent).afterClosed().subscribe({
       next: (v) => {
         if (!!v) {
           const ultimoId = this.courses.length > 0 ? this.courses[this.courses.length - 1].id : 0;
           const nuevoId = ultimoId + 1;
-          this.courses = [
-            ...this.courses,
-            {
-              id:nuevoId,
-              ...v,
+          const newData: Course = {
+            id: nuevoId,
+            ...v,
+          };
+          this.coursesService.createCourse(newData).subscribe({
+            next: () => {
+              this.courses = this.courses.concat(newData);
             },
-          ]
+            error: (error) => {
+              console.error('Error al enviar datos al servidor:', error);
+            }
+          });
         }
       },
     });
   }
-  onEditCourse(user:Course):void{
+  onEditCourse(course:Course):void{
     this.matDialog.open(ModalCoursesComponent,{
-      data:user,
+      data:course,
     }).afterClosed().subscribe({
       next:(v)=>{
         if(!!v){
-          this.courses=this.courses.map((u)=>u.id===user.id?({...u,...v}):u);
+          const updatedUser = { ...course, ...v };
+          this.coursesService.updateCourse(updatedUser.id,updatedUser).subscribe({
+            next: () => {
+              this.courses=this.courses.map((u)=>u.id===course.id?({...u,...v}):u);
+            },
+            error: (error) => {
+              console.error('Error al enviar datos al servidor:', error);
+            }
+          })
         }
       }
     });
   }
-  onDeleteCourse(userId:number):void{
-    this.courses=this.courses.filter((u)=>u.id!==userId);
+  onDeleteCourse(courseId:number):void{
+    this.coursesService.deleteCourse(courseId).subscribe({
+      next: () => {
+        this.courses = this.courses.filter((u) => u.id !== courseId);
+      },
+      error: (error) => {
+        console.error('Error al eliminar usuario en el servidor:', error);
+      }
+    });
   }
 }

@@ -2,10 +2,9 @@ import { Component, OnDestroy, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatDrawer } from '@angular/material/sidenav';
 import { ModalUsersComponent } from './components/modal-users/modal-users.component';
-import { Alums } from 'src/app/models';
-import { DataService } from 'src/app/shared/services/data.service';
 import { UsersService } from 'src/app/dashboard/pages/users/users.service';
 import {Subscription} from 'rxjs';
+import { Alums } from './models/usersModels';
 
 @Component({
   selector: 'app-users',
@@ -42,13 +41,18 @@ export class UsersComponent implements OnDestroy{
         if (!!v) {
           const ultimoId = this.alums.length > 0 ? this.alums[this.alums.length - 1].id : 0;
           const nuevoId = ultimoId + 1;
-          this.alums = [
-            ...this.alums,
-            {
-              id:nuevoId,
-              ...v,
+          const newData: Alums = {
+            id: nuevoId,
+            ...v,
+          };
+          this.usersService.createAlum(newData).subscribe({
+            next: () => {
+              this.alums = this.alums.concat(newData);
             },
-          ]
+            error: (error) => {
+              console.error('Error al enviar datos al servidor:', error);
+            }
+          });
         }
       },
     });
@@ -59,12 +63,27 @@ export class UsersComponent implements OnDestroy{
     }).afterClosed().subscribe({
       next:(v)=>{
         if(!!v){
-          this.alums=this.alums.map((u)=>u.id===user.id?({...u,...v}):u);
+          const updatedUser = { ...user, ...v };
+          this.usersService.updateAlum(updatedUser.id,updatedUser).subscribe({
+            next: () => {
+              this.alums=this.alums.map((u)=>u.id===user.id?({...u,...v}):u);
+            },
+            error: (error) => {
+              console.error('Error al enviar datos al servidor:', error);
+            }
+          })
         }
       }
     });
   }
   onDeleteUser(userId:number):void{
-    this.alums=this.alums.filter((u)=>u.id!==userId);
+    this.usersService.deleteAlum(userId).subscribe({
+      next: () => {
+        this.alums = this.alums.filter((u) => u.id !== userId);
+      },
+      error: (error) => {
+        console.error('Error al eliminar usuario en el servidor:', error);
+      }
+    });
   }
 }

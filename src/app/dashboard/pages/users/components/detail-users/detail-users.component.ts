@@ -1,10 +1,10 @@
 import { Component, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { Alums, Course } from 'src/app/models';
 import { Router } from '@angular/router';
-import { DataService } from 'src/app/shared/services/data.service';
 import { UsersService } from '../../users.service';
+import { Alums } from '../../models/usersModels';
+import { Course } from '../../../courses/models/coursesModels';
 
 @Component({
   selector: 'app-detail-users',
@@ -30,8 +30,9 @@ export class DetailUsersComponent implements OnDestroy {
     private router: Router) {
     this.dataSubscription = this.usersService.getAlumById(this.activateRoute.snapshot.params['id']).subscribe({
       next: (alum) => {
-        console.log(alum)
         this.alum = alum;
+        console.log(alum);
+        console.log(this.alum);
         this.usersService
             .getCoursesByIds(this.alum.cursesId)
             .subscribe((courses) => {

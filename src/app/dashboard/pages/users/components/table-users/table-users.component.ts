@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Router } from '@angular/router';
-import { Alums } from 'src/app/models';
+import { Alums } from '../../models/usersModels';
 
 @Component({
   selector: 'app-table-users',

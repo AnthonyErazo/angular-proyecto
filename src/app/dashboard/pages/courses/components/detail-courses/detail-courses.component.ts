@@ -1,8 +1,9 @@
 import { Component, OnDestroy} from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { Alums, Course } from 'src/app/models';
-import { DataService } from 'src/app/shared/services/data.service';
+import { CoursesService } from '../../courses.service';
+import { Course } from '../../models/coursesModels';
+import { Alums } from '../../../users/models/usersModels';
 
 @Component({
   selector: 'app-detail-courses',
@@ -22,12 +23,12 @@ export class DetailCoursesComponent implements OnDestroy{
   loading=true;
   private dataSubscription: Subscription = new Subscription();
   constructor(private activateRoute:ActivatedRoute,
-    private dataService:DataService,
+    private coursesService:CoursesService,
     private router: Router){
-      this.dataSubscription = this.dataService.getCourseById(this.activateRoute.snapshot.params['id']).subscribe({
+      this.dataSubscription = this.coursesService.getCourseById(this.activateRoute.snapshot.params['id']).subscribe({
         next: (course) => {
           this.course = course;
-          this.dataService
+          this.coursesService
             .getAlumsByIds(this.course.alumsId)
             .subscribe((alum) => {
               this.alumsCourses = alum;

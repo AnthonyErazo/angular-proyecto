@@ -1,17 +1,14 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, catchError, throwError } from 'rxjs';
+import { Observable} from 'rxjs';
 import { environment } from 'src/app/environments/environments.local';
-import { Alums, Course } from 'src/app/models';
+import { Alums } from './models/usersModels';
+import { Course } from '../courses/models/coursesModels';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UsersService {
-  private _authUser$ = new BehaviorSubject<Alums | null>(null);
-  public authUser$ = this._authUser$.asObservable();
-
-
   constructor(private httpClient: HttpClient) { }
 
   getAlums(): Observable<Alums[]> {
@@ -26,4 +23,14 @@ export class UsersService {
     console.log(typeof courseIdsString)
     return this.httpClient.get<Course[]>(`${environment.baseUrl}/courses?id=${courseIdsString}`);
   }
+  createAlum(alum: Alums): Observable<Alums> {
+    return this.httpClient.post<Alums>(`${environment.baseUrl}/alums`, alum);
+  }
+  updateAlum(alumId: number, newData: Alums): Observable<Alums> {
+    return this.httpClient.put<Alums>(`${environment.baseUrl}/alums/${alumId}`, newData);
+  }
+  deleteAlum(alumId: number): Observable<void> {
+    return this.httpClient.delete<void>(`${environment.baseUrl}/alums/${alumId}`);
+  }
+  
 }
