@@ -31,8 +31,6 @@ export class DetailUsersComponent implements OnDestroy {
     this.dataSubscription = this.usersService.getAlumById(this.activateRoute.snapshot.params['id']).subscribe({
       next: (alum) => {
         this.alum = alum;
-        console.log(alum);
-        console.log(this.alum);
         this.usersService
             .getCoursesByIds(this.alum.cursesId)
             .subscribe((courses) => {
@@ -48,6 +46,7 @@ export class DetailUsersComponent implements OnDestroy {
         }
       }
     });
+    // console.log(this.alum)
   }
   ngOnDestroy(): void {
     this.dataSubscription.unsubscribe();

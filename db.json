@@ -1,19 +1,92 @@
 {
+  "courses": [
+    {
+      "id": 1,
+      "name": "cursoA",
+      "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia earum quod iusto, illum excepturi, error minus blanditiis aperiam adipisci recusandae possimus dolores? Distinctio, blanditiis deserunt? Eaque hic dolore voluptates perspiciatis.Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia earum quod iusto, illum excepturi, error minus blanditiis aperiam adipisci recusandae possimus dolores? Distinctio, blanditiis deserunt? Eaque hic dolore voluptates perspiciatis.",
+      "starDate": "2024/01/10",
+      "endDate": "2024/02/10",
+      "idAlumns": [
+        1,
+        2,
+        7
+      ]
+    },
+    {
+      "id": 2,
+      "name": "cursoB",
+      "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia earum quod iusto, illum excepturi, error minus blanditiis aperiam adipisci recusandae possimus dolores? Distinctio, blanditiis deserunt? Eaque hic dolore voluptates perspiciatis.Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia earum quod iusto, illum excepturi, error minus blanditiis aperiam adipisci recusandae possimus dolores? Distinctio, blanditiis deserunt? Eaque hic dolore voluptates perspiciatis.",
+      "starDate": "2024/01/20",
+      "endDate": "2024/03/01",
+      "idAlumns": [
+        1,
+        3,
+        4
+      ]
+    },
+    {
+      "id": 3,
+      "name": "cursoC",
+      "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia earum quod iusto, illum excepturi, error minus blanditiis aperiam adipisci recusandae possimus dolores? Distinctio, blanditiis deserunt? Eaque hic dolore voluptates perspiciatis.Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia earum quod iusto, illum excepturi, error minus blanditiis aperiam adipisci recusandae possimus dolores? Distinctio, blanditiis deserunt? Eaque hic dolore voluptates perspiciatis.",
+      "starDate": "2024/02/01",
+      "endDate": "2024/04/20",
+      "idAlumns": [
+        2,
+        4,
+        6,
+        7
+      ]
+    },
+    {
+      "id": 4,
+      "name": "cursoD",
+      "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia earum quod iusto, illum excepturi, error minus blanditiis aperiam adipisci recusandae possimus dolores? Distinctio, blanditiis deserunt? Eaque hic dolore voluptates perspiciatis.Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia earum quod iusto, illum excepturi, error minus blanditiis aperiam adipisci recusandae possimus dolores? Distinctio, blanditiis deserunt? Eaque hic dolore voluptates perspiciatis.",
+      "starDate": "10/03/2024",
+      "endDate": "10/05/2024",
+      "idAlumns": [
+        4,
+        7
+      ]
+    },
+    {
+      "id": 5,
+      "name": "cursoE",
+      "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia earum quod iusto, illum excepturi, error minus blanditiis aperiam adipisci recusandae possimus dolores? Distinctio, blanditiis deserunt? Eaque hic dolore voluptates perspiciatis.Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia earum quod iusto, illum excepturi, error minus blanditiis aperiam adipisci recusandae possimus dolores? Distinctio, blanditiis deserunt? Eaque hic dolore voluptates perspiciatis.",
+      "starDate": "2024/01/20",
+      "endDate": "2024/04/29",
+      "idAlumns": [
+        3,
+        5,
+        7
+      ]
+    },
+    {
+      "id": 6,
+      "name": "cursoF",
+      "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia earum quod iusto, illum excepturi, error minus blanditiis aperiam adipisci recusandae possimus dolores? Distinctio, blanditiis deserunt? Eaque hic dolore voluptates perspiciatis.Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia earum quod iusto, illum excepturi, error minus blanditiis aperiam adipisci recusandae possimus dolores? Distinctio, blanditiis deserunt? Eaque hic dolore voluptates perspiciatis.",
+      "starDate": "2024/02/11",
+      "endDate": "2024/05/20",
+      "idAlumns": [
+        1,
+        5
+      ]
+    }
+  ],
   "alums": [
     {
       "id": 1,
       "name": "NombreA NombreA",
       "lastName": "ApellidoA ApellidoA",
-      "email":"alumno1@email.com",
+      "email": "alumno1@email.com",
       "condition": "Regular",
       "semester": 1,
       "age": 18,
-      "cursesId":[
+      "cursesId": [
         1,
         2,
         6
       ]
-  },
+    },
     {
       "id": 2,
       "name": "NombreB NombreB",
@@ -108,56 +181,6 @@
       "password": "54321",
       "token": "ddsar4324bfebowb43242qoinon321321"
     }
-  ],
-  "courses": [
-    {
-      "id":1,
-      "name":"cursoA",
-      "description":"Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia earum quod iusto, illum excepturi, error minus blanditiis aperiam adipisci recusandae possimus dolores? Distinctio, blanditiis deserunt? Eaque hic dolore voluptates perspiciatis.Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia earum quod iusto, illum excepturi, error minus blanditiis aperiam adipisci recusandae possimus dolores? Distinctio, blanditiis deserunt? Eaque hic dolore voluptates perspiciatis.",
-      "starDate":"2024/01/10",
-      "endDate":"2024/02/10",
-      "alumsId":[1,2,7]
-  },
-  {
-      "id":2,
-      "name":"cursoB",
-      "description":"Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia earum quod iusto, illum excepturi, error minus blanditiis aperiam adipisci recusandae possimus dolores? Distinctio, blanditiis deserunt? Eaque hic dolore voluptates perspiciatis.Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia earum quod iusto, illum excepturi, error minus blanditiis aperiam adipisci recusandae possimus dolores? Distinctio, blanditiis deserunt? Eaque hic dolore voluptates perspiciatis.",
-      "starDate":"2024/01/20",
-      "endDate":"2024/03/01",
-      "alumsId":[1,3,4]
-  },
-  {
-      "id":3,
-      "name":"cursoC",
-      "description":"Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia earum quod iusto, illum excepturi, error minus blanditiis aperiam adipisci recusandae possimus dolores? Distinctio, blanditiis deserunt? Eaque hic dolore voluptates perspiciatis.Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia earum quod iusto, illum excepturi, error minus blanditiis aperiam adipisci recusandae possimus dolores? Distinctio, blanditiis deserunt? Eaque hic dolore voluptates perspiciatis.",
-      "starDate":"2024/02/01",
-      "endDate":"2024/04/20",
-      "alumsId":[2,4,6,7]
-  },
-  {
-      "id":4,
-      "name":"cursoD",
-      "description":"Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia earum quod iusto, illum excepturi, error minus blanditiis aperiam adipisci recusandae possimus dolores? Distinctio, blanditiis deserunt? Eaque hic dolore voluptates perspiciatis.Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia earum quod iusto, illum excepturi, error minus blanditiis aperiam adipisci recusandae possimus dolores? Distinctio, blanditiis deserunt? Eaque hic dolore voluptates perspiciatis.",
-      "starDate":"10/03/2024",
-      "endDate":"10/05/2024",
-      "alumsId":[4,7]
-  },
-  {
-      "id":5,
-      "name":"cursoE",
-      "description":"Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia earum quod iusto, illum excepturi, error minus blanditiis aperiam adipisci recusandae possimus dolores? Distinctio, blanditiis deserunt? Eaque hic dolore voluptates perspiciatis.Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia earum quod iusto, illum excepturi, error minus blanditiis aperiam adipisci recusandae possimus dolores? Distinctio, blanditiis deserunt? Eaque hic dolore voluptates perspiciatis.",
-      "starDate":"2024/01/20",
-      "endDate":"2024/04/29",
-      "alumsId":[3,5,7]
-  },
-  {
-      "id":6,
-      "name":"cursoF",
-      "description":"Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia earum quod iusto, illum excepturi, error minus blanditiis aperiam adipisci recusandae possimus dolores? Distinctio, blanditiis deserunt? Eaque hic dolore voluptates perspiciatis.Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia earum quod iusto, illum excepturi, error minus blanditiis aperiam adipisci recusandae possimus dolores? Distinctio, blanditiis deserunt? Eaque hic dolore voluptates perspiciatis.",
-      "starDate":"2024/02/11",
-      "endDate":"2024/05/20",
-      "alumsId":[1,5]
-  }
   ],
   "notices": [
     {

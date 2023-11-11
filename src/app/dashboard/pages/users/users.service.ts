@@ -16,11 +16,10 @@ export class UsersService {
   }
   
   getAlumById(alumId: number): Observable<Alums> {
-    return this.httpClient.get<Alums>(`${environment.baseUrl}/alums?id=${alumId}`);
+    return this.httpClient.get<Alums>(`${environment.baseUrl}/alums/${alumId}`);
   }
   getCoursesByIds(coursesIds: number[]): Observable<Course[]> {
     const courseIdsString = coursesIds.join('&id=');
-    console.log(typeof courseIdsString)
     return this.httpClient.get<Course[]>(`${environment.baseUrl}/courses?id=${courseIdsString}`);
   }
   createAlum(alum: Alums): Observable<Alums> {

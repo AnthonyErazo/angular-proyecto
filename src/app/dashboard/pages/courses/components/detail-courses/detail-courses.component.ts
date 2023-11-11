@@ -17,7 +17,7 @@ export class DetailCoursesComponent implements OnDestroy{
     description: '', 
     starDate: new Date(), 
     endDate: new Date(),
-    alumsId:[] 
+    idAlumns:[] 
   };
   alumsCourses:Alums[]=[];
   loading=true;
@@ -29,7 +29,7 @@ export class DetailCoursesComponent implements OnDestroy{
         next: (course) => {
           this.course = course;
           this.coursesService
-            .getAlumsByIds(this.course.alumsId)
+            .getAlumsByIds(this.course.idAlumns)
             .subscribe((alum) => {
               this.alumsCourses = alum;
               this.loading = false;

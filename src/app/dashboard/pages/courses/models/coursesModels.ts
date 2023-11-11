@@ -4,5 +4,5 @@ export interface Course{
     description:String;
     starDate:Date;
     endDate:Date;
-    alumsId:Array<number>;
+    idAlumns:Array<number>;
 }

@@ -17,11 +17,10 @@ export class CoursesService {
   }
   
   getCourseById(courseId: number): Observable<Course> {
-    return this.httpClient.get<Course>(`${environment.baseUrl}/courses?id=${courseId}`);
+    return this.httpClient.get<Course>(`${environment.baseUrl}/courses/${courseId}`);
   }
   getAlumsByIds(coursesIds: number[]): Observable<Alums[]> {
     const courseIdsString = coursesIds.join('&id=');
-    console.log(typeof courseIdsString)
     return this.httpClient.get<Alums[]>(`${environment.baseUrl}/alums?id=${courseIdsString}`);
   }
   createCourse(course: Course): Observable<Course> {
