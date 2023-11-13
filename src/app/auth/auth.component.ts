@@ -1,7 +1,6 @@
 import { Component} from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from './auth.service';
-import { tap } from 'rxjs';
 
 @Component({
   selector: 'app-auth',
@@ -28,17 +27,20 @@ export class AuthComponent {
       this.loginForm.markAllAsTouched();
     } else {
       this.isLoading = true;
+      this.loginInvalid = false;
       this.authService.login(this.loginForm.getRawValue())
-      .pipe(
-        tap((authenticated) => {
-          if (authenticated) {
-          } else {
+        .subscribe({
+          next: () => {
+          },
+          error: () => {
             this.loginInvalid = true;
+            this.isLoading = false; 
             this.loginForm.reset();
+          },
+          complete: () => {
+            this.isLoading = false;
           }
-          this.isLoading = false;
-        })
-      ).subscribe();
+        });
     }
   }
 }

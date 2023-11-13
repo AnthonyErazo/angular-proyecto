@@ -1,3 +1,10 @@
+<div>
+    <p>
+        {{(authUser$|async)?.usuario}}
+        <br>
+        {{username|async}}
+    </p>
+</div>
 <mat-nav-list>
     <mat-list-item routerLink="/home">
         <a>Inicio</a>

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, map } from 'rxjs';
+import { BehaviorSubject, Observable,map } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { environment } from '../environments/environments.local';
@@ -14,32 +14,23 @@ export class AuthService {
 
   constructor(private httpClient: HttpClient, private router: Router) {}
 
-  login(payload: LoginPayload): Observable<boolean> {
-    return new Observable<boolean>((observer) => {
-      setTimeout(()=>{
-        this.httpClient
-        .get<User[]>(
-          `${environment.baseUrl}/users?usuario=${payload.user}&password=${payload.password}`
-        )
-        .subscribe({
-          next: (response) => {
-            if (!response.length) {
-              observer.next(false);
-            } else {
-              const authUser = response[0];
-              this._authUser$.next(authUser);
-              localStorage.setItem('token', authUser.token);
-              this.router.navigate(['home']);
-              observer.next(true);
-            }
-            observer.complete();
-          },
-          error: (err) => {
-            observer.error(err);
-          },
-        });
-      },2000);
-    });
+  login(payload: LoginPayload): Observable<void> {
+    return this.httpClient
+      .get<User[]>(
+        `${environment.baseUrl}/users?usuario=${payload.user}&password=${payload.password}`
+      )
+      .pipe(
+        map((response) => {
+          if (!response.length) {
+            throw new Error('Invalid credentials');
+          } else {
+            const authUser = response[0];
+            this._authUser$.next(authUser);
+            localStorage.setItem('token', authUser.token);
+            this.router.navigate(['home']);
+          }
+        })
+      );
   }
 
   verifyToken(): Observable<boolean> {
